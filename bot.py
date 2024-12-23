@@ -1,32 +1,24 @@
-import os
+from dotenv import load_dotenv
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
+import os
 
-# Load environment variables
-load_dotenv()
-
-# Set up the bot
 intents = discord.Intents.default()
-intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
+intents.members = True  # Required for member-related events
+intents.message_content = True  # Enables the message content intent
 
-@bot.event
+client = commands.Bot(command_prefix="!", intents=intents)
+
+
+@client.event
 async def on_ready():
-    print(f'{bot.user} has connected to Discord!')
-    try:
-        synced = await bot.tree.sync()
-        print(f"Synced {len(synced)} command(s)")
-    except Exception as e:
-        print(f"Failed to sync commands: {e}")
+    print("Bot Ready To Use!")
+    print("-----------------")
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send('pong')
 
-@bot.command()
+@client.command()
 async def hello(ctx):
-    await ctx.send(f"Hello {ctx.author.name}! 😃")
+    await ctx.send("مرحبا بعضو طاقمي المذهل ! رارارارارارا! ")
 
 # Run the bot
 if __name__ == "__main__":
