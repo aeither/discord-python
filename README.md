@@ -6,24 +6,24 @@
 
 ## Overview
 
-This project is a simple Discord bot built using the discord.py library. It demonstrates the basic structure of a Discord bot and uses Poetry for dependency management. The bot responds to commands and can be easily extended with additional functionality.
+This project is a simple Discord bot built using the discord.py library. It demonstrates the basic structure of a Discord bot and uses uv for dependency management. The bot responds to commands and can be easily extended with additional functionality.
 
 ## Key Features
 
 - Minimal Discord bot application
 - Responds to '!ping' and '!hello' commands
 - Uses discord.py for bot functionality
-- Uses Poetry for dependency management
+- Uses uv for dependency management
 - Easy to understand and extend
 
 ## Setup
 
 ```bash
-pip install poetry
+pip install uv
 ```
 
 ```bash
-poetry install
+uv sync
 ```
 
 ## Develop
@@ -31,7 +31,7 @@ poetry install
 To run the bot locally:
 
 ```bash
-poetry run python bot.py
+uv run python bot.py
 ```
 
 Make sure to set up your `.env` file with your Discord bot token:
@@ -65,7 +65,7 @@ Open Discord, Add Discord to the channel and Try with `!hello` or `!ping`.
 ## Learn More
 
 - [Discord.py Documentation](https://discordpy.readthedocs.io/)
-- [Poetry Documentation](https://python-poetry.org/docs/)
+- [uv Documentation](https://docs.astral.sh/uv/)
 - [Discord Developer Portal](https://discord.com/developers/docs)
 - [Railway Documentation](https://docs.railway.app/)
 - [Repository](https://github.com/aeither/discord-python)
