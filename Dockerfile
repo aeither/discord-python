@@ -12,7 +12,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Install uv
-RUN pip install --no-cache-dir --upgrade pip uv==0.5.29
+RUN pip install --no-cache-dir --upgrade pip uv==0.9.28
 
 # Set UV environment variables for Railway
 ENV UV_PYTHON_DOWNLOADS=never \
@@ -27,9 +27,6 @@ RUN uv sync --locked --no-dev --no-install-project
 
 # Copy application code
 COPY . .
-
-# Install the project in non-editable mode
-RUN uv sync --locked --no-dev --no-editable
 
 # Run bot
 CMD ["uv", "run", "python", "bot.py"]
