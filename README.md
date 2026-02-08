@@ -2,7 +2,7 @@
 
 # Discord Python
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/x6I4zS?referralCode=CREDITS)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/discord-python?referralCode=CREDITS&utm_medium=integration&utm_source=template&utm_campaign=generic)
 
 ## Overview
 
