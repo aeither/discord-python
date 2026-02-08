@@ -20,11 +20,11 @@ async def on_ready():
     except Exception as e:
         print(f"Failed to sync commands: {e}")
 
-@bot.command()
+@bot.hybrid_command(name="ping", description="Replies with pong")
 async def ping(ctx):
     await ctx.send('pong')
 
-@bot.command()
+@bot.hybrid_command(name="hello", description="Says hello to the user")
 async def hello(ctx):
     await ctx.send(f"Hello {ctx.author.name}! 😃")
 
