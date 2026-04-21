@@ -29,17 +29,16 @@ async def weekly_post():
         print("❌ Salon introuvable, vérifie CHANNEL_ID")
         return
 
-    message = "📋 **Liste hebdomadaire des membres de chaque événement**\n\n"
+    await channel.send("📋 **Liste hebdomadaire des membres**")
+
     for role_id in ROLE_IDS:
         role = guild.get_role(role_id)
         if not role:
             print(f"❌ Rôle {role_id} introuvable, ignoré")
             continue
         members = [m.display_name for m in role.members]
-        message += f"**{role.name}** ({len(members)}) :\n"
+        message = f"**{role.name}** ({len(members)}) :\n"
         message += "\n".join(f"• {m}" for m in members)
-        message += "\n\n"
-
-    await channel.send(message)
+        await channel.send(message)
 
 client.run(TOKEN)
