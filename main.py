@@ -17,19 +17,29 @@ async def on_ready():
     if not weekly_post.is_running():
         weekly_post.start()
 
-@tasks.loop(hours=168)  # 168h = 1 semaine
+@tasks.loop(hours=168)
 async def weekly_post():
     guild = client.get_guild(GUILD_ID)
+    if not guild:
+        print("❌ Serveur introuvable, vérifie GUILD_ID")
+        return
+
     channel = guild.get_channel(CHANNEL_ID)
-    
+    if not channel:
+        print("❌ Salon introuvable, vérifie CHANNEL_ID")
+        return
+
     message = "📋 **Liste hebdomadaire des membres de chaque événement**\n\n"
     for role_id in ROLE_IDS:
         role = guild.get_role(role_id)
+        if not role:
+            print(f"❌ Rôle {role_id} introuvable, ignoré")
+            continue
         members = [m.display_name for m in role.members]
         message += f"**{role.name}** ({len(members)}) :\n"
         message += "\n".join(f"• {m}" for m in members)
         message += "\n\n"
-    
+
     await channel.send(message)
 
 client.run(TOKEN)
