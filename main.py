@@ -14,7 +14,8 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print(f"Bot connecté : {client.user}")
-    weekly_post.start()
+    if not weekly_post.is_running():
+        weekly_post.start()
 
 @tasks.loop(hours=168)  # 168h = 1 semaine
 async def weekly_post():
