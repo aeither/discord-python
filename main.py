@@ -1,0 +1,34 @@
+import discord
+import os
+from discord.ext import tasks
+
+TOKEN = os.environ["DISCORD_TOKEN"]
+GUILD_ID = 625247884794658816          # ID de ton serveur
+CHANNEL_ID = 905508012440027186       # ID du salon où poster
+ROLE_IDS = [979059050635485225, 905508354816897065, 979059317774901349, 979059113428414525, 905508238823391332, 979059197553573929]   # IDs des rôles à lister
+
+intents = discord.Intents.default()
+intents.members = True
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print(f"Bot connecté : {client.user}")
+    weekly_post.start()
+
+@tasks.loop(hours=168)  # 168h = 1 semaine
+async def weekly_post():
+    guild = client.get_guild(GUILD_ID)
+    channel = guild.get_channel(CHANNEL_ID)
+    
+    message = "📋 **Liste hebdomadaire des membres de chaque événement**\n\n"
+    for role_id in ROLE_IDS:
+        role = guild.get_role(role_id)
+        members = [m.display_name for m in role.members]
+        message += f"**{role.name}** ({len(members)}) :\n"
+        message += "\n".join(f"• {m}" for m in members)
+        message += "\n\n"
+    
+    await channel.send(message)
+
+client.run(TOKEN)
